@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Manager</title>
+<style>
+body{
+    margin:0;
+    font-family: Verdana;
+    background:#e9edf2;
+}
+.header{
+    background:#202a34;
+    color:#fff;
+    padding:12px 18px;
+}
+.header b{
+    font-size:18px;
+}
+.header .right{
+    float:right;
+}
+.header input{
+    padding:4px;
+}
+.header button{
+    padding:5px 8px;
+}
+.main{
+    width:920px;
+    margin:20px auto;
+    background:#fff;
+    padding:15px;
+    border:1px solid #ccc;
+}
+.title{
+    font-size:20px;
+    margin-bottom:10px;
+}
+.addbtn{
+    float:right;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:6px 10px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+th,td{
+    border:1px solid #cfcfcf;
+    padding:7px;
+    text-align:center;
+}
+th{
+    background:#f1f3f6;
+}
+.btn1{
+    background:#f0ad4e;
+    border:none;
+    padding:4px 7px;
+}
+.btn2{
+    background:#d9534f;
+    border:none;
+    color:white;
+    padding:4px 7px;
+}
+.formarea{
+    width:700px;
+    margin:25px auto;
+    background:#fff;
+    border:1px solid #bbb;
+    padding:12px;
+}
+.formarea h3{
+    margin:0 0 10px 0;
+    background:#0d6efd;
+    color:white;
+    padding:6px;
+}
+.line{
+    margin:8px 0;
+}
+.line span{
+    display:inline-block;
+    width:110px;
+}
+input[type=text],select{
+    width:220px;
+    padding:4px;
+}
+textarea{
+    width:95%;
+    padding:6px;
+}
+.save{
+    background:#198754;
+    color:white;
+    border:none;
+    padding:6px 12px;
+}
+.cancel{
+    background:#6c757d;
+    color:white;
+    border:none;
+    padding:6px 12px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <b>HR Management</b>
+    <div class="right">
+        <input type="text" placeholder="Search">
+        <button>Go</button>
+    </div>
+</div>
+
+<div class="main">
+    <div class="title">Employee List <button class="addbtn">Add</button></div>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Fatima Beatriz</td>
+            <td>fatima@gmail.com</td>
+            <td>0985674321</td>
+            <td>Staff</td>
+            <td><button class="btn1">Edit</button> <button class="btn2">Delete</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Gabriel Harn</td>
+            <td>gabriel@gmail.com</td>
+            <td>0356732131</td>
+            <td>Staff</td>
+            <td><button class="btn1">Edit</button> <button class="btn2">Delete</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Charles Diya</td>
+            <td>charles@gmail.com</td>
+            <td>0347658833</td>
+            <td>Staff</td>
+            <td><button class="btn1">Edit</button> <button class="btn2">Delete</button></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Frank Lamdo</td>
+            <td>frank@gmail.com</td>
+            <td>097544768</td>
+            <td>Manager</td>
+            <td><button class="btn1">Edit</button> <button class="btn2">Delete</button></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Louis Tom</td>
+            <td>louis@gmail.com</td>
+            <td>078956823</td>
+            <td>Staff</td>
+            <td><button class="btn1">Edit</button> <button class="btn2">Delete</button></td>
+        </tr>
+    </table>
+</div>
+
+<div class="formarea">
+    <h3>Add New Employee</h3>
+
+    <div class="line">
+        <span>Name</span>
+        <input type="text">
+        <span>Email</span>
+        <input type="text">
+    </div>
+
+    <div class="line">
+        <span>Phone</span>
+        <input type="text">
+        <span>Position</span>
+        <select>
+            <option>Select</option>
+            <option>Staff</option>
+            <option>Manager</option>
+            <option>CEO</option>
+        </select>
+    </div>
+
+    <div class="line">
+        <span>Gender</span>
+        <input type="radio" name="g"> Male
+        <input type="radio" name="g"> Female
+    </div>
+
+    <div class="line">
+        <button class="save">Save</button>
+        <button class="cancel">Cancel</button>
+    </div>
+</div>
+
+</body>
+</html>
