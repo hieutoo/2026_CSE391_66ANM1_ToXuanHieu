@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form nhan vien</title>
+<style>
+body{
+    font-family: Tahoma;
+    background:#eef1f5;
+}
+.box{
+    width:720px;
+    margin:25px auto;
+    background:#fff;
+    border:1px solid #bbb;
+    padding:18px;
+}
+.tieude{
+    font-size:18px;
+    margin-top:15px;
+    border-bottom:1px solid #888;
+    padding-bottom:4px;
+    font-weight:bold;
+}
+.dong{
+    margin:8px 0;
+}
+.ten{
+    display:inline-block;
+    width:160px;
+}
+input[type=text],input[type=email],input[type=date],select{
+    width:280px;
+    padding:4px;
+}
+textarea{
+    width:480px;
+    padding:6px;
+}
+.cuoi{
+    margin-top:15px;
+}
+button{
+    padding:6px 14px;
+    margin-right:8px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<form>
+
+<div class="tieude">Basic Info</div>
+
+<div class="dong">
+<span class="ten">Employee ID</span>
+<input type="text" value="9">
+</div>
+
+<div class="dong">
+<span class="ten">Last Name</span>
+<input type="text" value="Dodsworth">
+</div>
+
+<div class="dong">
+<span class="ten">First Name</span>
+<input type="text" value="Anne">
+</div>
+
+<div class="dong">
+<span class="ten">Gender</span>
+<input type="radio" name="gt"> Male
+<input type="radio" name="gt"> Female
+<input type="radio" name="gt" checked> XXX
+<input type="radio" name="gt"> ZZZ
+</div>
+
+<div class="dong">
+<span class="ten">Title</span>
+<input type="text" value="Sales Representative">
+</div>
+
+<div class="dong">
+<span class="ten">Suffix</span>
+<input type="text" value="Ms">
+</div>
+
+<div class="dong">
+<span class="ten">Birth Date</span>
+<input type="date">
+</div>
+
+<div class="dong">
+<span class="ten">Hire Date</span>
+<input type="date">
+</div>
+
+<div class="dong">
+<span class="ten">SSN</span>
+<input type="text">
+</div>
+
+<div class="dong">
+<span class="ten">Reports To</span>
+<select>
+<option>Buchan</option>
+<option>Fuller</option>
+<option>Leverling</option>
+</select>
+</div>
+
+<div class="tieude">Contact Info</div>
+
+<div class="dong">
+<span class="ten">Email</span>
+<input type="email" placeholder="name@example.com">
+</div>
+
+<div class="dong">
+<span class="ten">Address</span>
+<input type="text" value="7 Houndstooth Rd.">
+</div>
+
+<div class="dong">
+<span class="ten">City</span>
+<input type="text" value="London">
+</div>
+
+<div class="dong">
+<span class="ten">Region</span>
+<input type="text">
+</div>
+
+<div class="dong">
+<span class="ten">Postal Code</span>
+<input type="text" value="WG2 7LT">
+</div>
+
+<div class="dong">
+<span class="ten">Country</span>
+<select>
+<option>Russian Federation</option>
+<option>USA</option>
+<option>Vietnam</option>
+</select>
+</div>
+
+<div class="dong">
+<span class="ten">Home Phone</span>
+<input type="text" value="(234)234-2342">
+</div>
+
+<div class="dong">
+<span class="ten">Photo</span>
+<input type="file">
+</div>
+
+<div class="tieude">Optional Info</div>
+
+<div class="dong">
+<span class="ten">Notes</span>
+<textarea rows="5">Anne has BA degree in English from St. Lawrence College. She is fluent in French and German.</textarea>
+</div>
+
+<div class="dong">
+<span class="ten">Preferred Shift</span>
+<input type="checkbox"> Regular
+<input type="checkbox"> Gravy Yard
+</div>
+
+<div class="dong">
+<span class="ten">Active</span>
+<input type="checkbox" checked>
+</div>
+
+<div class="dong">
+<span class="ten">Are you human?</span>
+<input type="text">
+</div>
+
+<div class="cuoi">
+<button type="submit">Submit</button>
+<button type="reset">Cancel</button>
+</div>
+
+</form>
+</div>
+
+</body>
+</html>
