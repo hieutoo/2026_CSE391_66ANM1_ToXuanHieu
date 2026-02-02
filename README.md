@@ -1,9 +1,9 @@
 # CSE391 – Nền tảng phát triển Web
 
 ## 👤 Thông tin sinh viên
-- **Họ và tên:** Phạm Gia Khiêm  
-- **Lớp:** 66CNTT1  
-- **Mã sinh viên:** 2451060674  
+- **Họ và tên:** Tô Xuân Hiếu 
+- **Lớp:** 66ANM1
+- **Mã sinh viên:** 2451271115
 
 ## 📘 Thông tin môn học
 - **Tên môn học:** CSE391 – Nền tảng phát triển Web  
