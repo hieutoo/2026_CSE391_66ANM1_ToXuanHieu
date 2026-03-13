@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý điểm sinh viên</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        input {
+            padding: 6px;
+            margin-right: 8px;
+        }
+
+        button {
+            padding: 6px 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 520px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .highlight {
+            background: #ffe96b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Bảng điểm sinh viên</h3>
+
+    <input id="txtName" placeholder="Họ tên">
+    <input id="txtScore" placeholder="Điểm (0-10)">
+    <button id="btnAdd">Thêm</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Điểm</th>
+                <th>Xếp loại</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+
+        <tbody id="dataBody"></tbody>
+    </table>
+
+    <p id="result">Tổng sinh viên: 0 | Điểm trung bình: 0</p>
+
+    <script>
+
+        const txtName = document.getElementById("txtName");
+        const txtScore = document.getElementById("txtScore");
+        const btnAdd = document.getElementById("btnAdd");
+        const dataBody = document.getElementById("dataBody");
+        const result = document.getElementById("result");
+
+        let students = [];
+
+        function classify(score) {
+
+            if (score >= 8.5) {
+                return "Giỏi";
+            } else if (score >= 7) {
+                return "Khá";
+            } else if (score >= 5) {
+                return "Trung bình";
+            } else {
+                return "Yếu";
+            }
+
+        }
+
+        function drawTable() {
+
+            dataBody.innerHTML = "";
+
+            let sum = 0;
+
+            students.forEach(function (item, i) {
+
+                sum += item.point;
+
+                const tr = document.createElement("tr");
+
+                if (item.point < 5) {
+                    tr.className = "highlight";
+                }
+
+                const c1 = document.createElement("td");
+                const c2 = document.createElement("td");
+                const c3 = document.createElement("td");
+                const c4 = document.createElement("td");
+                const c5 = document.createElement("td");
+
+                c1.textContent = i + 1;
+                c2.textContent = item.fullname;
+                c3.textContent = item.point;
+                c4.textContent = classify(item.point);
+
+                const btn = document.createElement("button");
+                btn.textContent = "Xóa";
+                btn.dataset.pos = i;
+
+                c5.appendChild(btn);
+
+                tr.appendChild(c1);
+                tr.appendChild(c2);
+                tr.appendChild(c3);
+                tr.appendChild(c4);
+                tr.appendChild(c5);
+
+                dataBody.appendChild(tr);
+
+            });
+
+            let average = 0;
+
+            if (students.length !== 0) {
+                average = sum / students.length;
+            }
+
+            result.textContent =
+                "Tổng sinh viên: " + students.length +
+                " | Điểm trung bình: " + average.toFixed(2);
+
+        }
+
+        function insertStudent() {
+
+            const name = txtName.value.trim();
+            const score = Number(txtScore.value);
+
+            if (name.length === 0) {
+                alert("Chưa nhập họ tên");
+                return;
+            }
+
+            if (isNaN(score) || score < 0 || score > 10) {
+                alert("Điểm không hợp lệ");
+                return;
+            }
+
+            students.push({
+                fullname: name,
+                point: score
+            });
+
+            drawTable();
+
+            txtName.value = "";
+            txtScore.value = "";
+            txtName.focus();
+        }
+
+        btnAdd.onclick = insertStudent;
+
+        txtScore.addEventListener("keydown", function (e) {
+
+            if (e.key === "Enter") {
+                insertStudent();
+            }
+
+        });
+
+        dataBody.addEventListener("click", function (e) {
+
+            if (e.target.tagName === "BUTTON") {
+
+                const index = e.target.dataset.pos;
+
+                students.splice(index, 1);
+
+                drawTable();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

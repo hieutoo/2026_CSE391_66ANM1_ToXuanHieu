@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        form {
+            width: 350px;
+        }
+
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Form Đăng ký</h3>
+
+    <form id="formReg">
+
+        <label>Họ và tên</label>
+        <input id="fullname">
+        <div id="e_fullname" class="error"></div>
+
+        <label>Email</label>
+        <input id="email">
+        <div id="e_email" class="error"></div>
+
+        <label>Số điện thoại</label>
+        <input id="phone">
+        <div id="e_phone" class="error"></div>
+
+        <label>Mật khẩu</label>
+        <input type="password" id="pass">
+        <div id="e_pass" class="error"></div>
+
+        <label>Xác nhận mật khẩu</label>
+        <input type="password" id="repass">
+        <div id="e_repass" class="error"></div>
+
+        <label>Giới tính</label><br>
+        <input type="radio" name="gender" value="Nam"> Nam
+        <input type="radio" name="gender" value="Nữ"> Nữ
+        <div id="e_gender" class="error"></div>
+
+        <label>
+            <input type="checkbox" id="agree"> Tôi đồng ý điều khoản
+        </label>
+        <div id="e_agree" class="error"></div>
+
+        <button type="submit">Đăng ký</button>
+
+    </form>
+
+    <div id="done"></div>
+
+    <script>
+
+        const formReg = document.getElementById("formReg");
+
+        const fullname = document.getElementById("fullname");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const pass = document.getElementById("pass");
+        const repass = document.getElementById("repass");
+        const agree = document.getElementById("agree");
+
+        function showErr(id, msg) {
+            document.getElementById(id).innerText = msg;
+        }
+
+        function clearErr(id) {
+            document.getElementById(id).innerText = "";
+        }
+
+        function checkName() {
+
+            let v = fullname.value.trim();
+            let r = /^[A-Za-zÀ-ỹ\s]{3,}$/;
+
+            if (v === "") {
+                showErr("e_fullname", "Không được để trống");
+                return false;
+            }
+
+            if (!r.test(v)) {
+                showErr("e_fullname", "Tên không hợp lệ");
+                return false;
+            }
+
+            clearErr("e_fullname");
+            return true;
+
+        }
+
+        function checkEmail() {
+
+            let v = email.value.trim();
+            let r = /^\S+@\S+\.\S+$/;
+
+            if (v === "") {
+                showErr("e_email", "Chưa nhập email");
+                return false;
+            }
+
+            if (!r.test(v)) {
+                showErr("e_email", "Email sai định dạng");
+                return false;
+            }
+
+            clearErr("e_email");
+            return true;
+
+        }
+
+        function checkPhone() {
+
+            let v = phone.value.trim();
+            let r = /^0\d{9}$/;
+
+            if (v === "") {
+                showErr("e_phone", "Chưa nhập số điện thoại");
+                return false;
+            }
+
+            if (!r.test(v)) {
+                showErr("e_phone", "Số điện thoại không đúng");
+                return false;
+            }
+
+            clearErr("e_phone");
+            return true;
+
+        }
+
+        function checkPass() {
+
+            let v = pass.value;
+            let r = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+            if (v === "") {
+                showErr("e_pass", "Chưa nhập mật khẩu");
+                return false;
+            }
+
+            if (!r.test(v)) {
+                showErr("e_pass", "Mật khẩu chưa đủ mạnh");
+                return false;
+            }
+
+            clearErr("e_pass");
+            return true;
+
+        }
+
+        function checkRepass() {
+
+            if (repass.value !== pass.value) {
+                showErr("e_repass", "Mật khẩu không khớp");
+                return false;
+            }
+
+            clearErr("e_repass");
+            return true;
+
+        }
+
+        function checkGender() {
+
+            let g = document.querySelector("input[name='gender']:checked");
+
+            if (!g) {
+                showErr("e_gender", "Chọn giới tính");
+                return false;
+            }
+
+            clearErr("e_gender");
+            return true;
+
+        }
+
+        function checkAgree() {
+
+            if (!agree.checked) {
+                showErr("e_agree", "Phải đồng ý điều khoản");
+                return false;
+            }
+
+            clearErr("e_agree");
+            return true;
+
+        }
+
+        formReg.addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            let ok = true;
+
+            ok = checkName() & checkEmail() & checkPhone() & checkPass() & checkRepass() & checkGender() & checkAgree();
+
+            if (ok) {
+
+                formReg.style.display = "none";
+
+                document.getElementById("done").innerHTML =
+                    "<p class='success'>Đăng ký thành công 🎉<br>Chào " + fullname.value + "</p>";
+
+            }
+
+        });
+
+        fullname.addEventListener("blur", checkName);
+        email.addEventListener("blur", checkEmail);
+        phone.addEventListener("blur", checkPhone);
+        pass.addEventListener("blur", checkPass);
+        repass.addEventListener("blur", checkRepass);
+
+        fullname.addEventListener("input", () => clearErr("e_fullname"));
+        email.addEventListener("input", () => clearErr("e_email"));
+        phone.addEventListener("input", () => clearErr("e_phone"));
+        pass.addEventListener("input", () => clearErr("e_pass"));
+        repass.addEventListener("input", () => clearErr("e_repass"));
+
+    </script>
+
+</body>
+
+</html>

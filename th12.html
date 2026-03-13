@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm kiếm sinh viên</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        input,
+        select {
+            padding: 6px;
+            margin-right: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 15px;
+            width: 520px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .warn {
+            background: #fff176;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        #msg {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Danh sách sinh viên</h3>
+
+    <input id="txtSearch" placeholder="Nhập tên cần tìm">
+
+    <select id="cboRank">
+        <option value="all">Tất cả</option>
+        <option value="Giỏi">Giỏi</option>
+        <option value="Khá">Khá</option>
+        <option value="Trung bình">Trung bình</option>
+        <option value="Yếu">Yếu</option>
+    </select>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th id="thScore">Điểm</th>
+                <th>Xếp loại</th>
+            </tr>
+        </thead>
+
+        <tbody id="tb"></tbody>
+
+    </table>
+
+    <p id="msg"></p>
+
+    <script>
+
+        const txtSearch = document.getElementById("txtSearch");
+        const cboRank = document.getElementById("cboRank");
+        const tb = document.getElementById("tb");
+        const thScore = document.getElementById("thScore");
+        const msg = document.getElementById("msg");
+
+        let data = [
+            { name: "Nguyễn An", score: 9 },
+            { name: "Lê Bình", score: 7.2 },
+            { name: "Trần Dũng", score: 4.5 },
+            { name: "Phạm Hạnh", score: 6.4 },
+            { name: "Đỗ Lan", score: 8.1 }
+        ];
+
+        let order = true;
+
+        function rankOf(s) {
+
+            if (s >= 8.5) return "Giỏi";
+            if (s >= 7) return "Khá";
+            if (s >= 5) return "Trung bình";
+            return "Yếu";
+
+        }
+
+        function show(list) {
+
+            tb.innerHTML = "";
+
+            if (list.length === 0) {
+
+                msg.innerHTML = "Không có kết quả";
+                return;
+
+            }
+
+            msg.innerHTML = "";
+
+            for (let i = 0; i < list.length; i++) {
+
+                let sv = list[i];
+
+                let tr = document.createElement("tr");
+
+                if (sv.score < 5) {
+                    tr.className = "warn";
+                }
+
+                let td1 = document.createElement("td");
+                let td2 = document.createElement("td");
+                let td3 = document.createElement("td");
+                let td4 = document.createElement("td");
+
+                td1.innerHTML = i + 1;
+                td2.innerHTML = sv.name;
+                td3.innerHTML = sv.score;
+                td4.innerHTML = rankOf(sv.score);
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+
+                tb.appendChild(tr);
+
+            }
+
+        }
+
+        function updateView() {
+
+            let keyword = txtSearch.value.toLowerCase().trim();
+            let r = cboRank.value;
+
+            let arr = [];
+
+            for (let i = 0; i < data.length; i++) {
+
+                let sv = data[i];
+
+                let checkName = sv.name.toLowerCase().includes(keyword);
+                let checkRank = (r === "all") || (rankOf(sv.score) === r);
+
+                if (checkName && checkRank) {
+                    arr.push(sv);
+                }
+
+            }
+
+            arr.sort(function (a, b) {
+
+                if (order) {
+                    return a.score - b.score;
+                } else {
+                    return b.score - a.score;
+                }
+
+            });
+
+            show(arr);
+
+        }
+
+        txtSearch.addEventListener("input", updateView);
+
+        cboRank.addEventListener("change", updateView);
+
+        thScore.onclick = function () {
+
+            order = !order;
+
+            if (order) {
+                thScore.innerHTML = "Điểm ▲";
+            } else {
+                thScore.innerHTML = "Điểm ▼";
+            }
+
+            updateView();
+
+        };
+
+        updateView();
+
+    </script>
+
+</body>
+
+</html>
